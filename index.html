@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevBoard — управление задачами</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>DevBoard</h1>
+    <p>Спринты, релизы, нагрузка команды</p>
+  </header>
+
+  <nav class="app-nav" aria-label="Навигация">
+    <ul>
+      <li><a href="#sprints">Спринты</a></li>
+      <li><a href="#releases">Релизы</a></li>
+      <li><a href="#team">Команда</a></li>
+    </ul>
+  </nav>
+
+  <main class="app-main">
+    <section id="sprints">
+      <h2>Спринты</h2>
+
+      <form class="filters">
+        <p class="field">
+          <label for="filter-search">Поиск</label>
+          <input type="search" id="filter-search" placeholder="Название или цель" />
+        </p>
+
+        <p class="field">
+          <label for="filter-status">Статус</label>
+          <select id="filter-status">
+            <option value="">Все</option>
+            <option value="Завершён">Завершён</option>
+            <option value="Активен">Активен</option>
+            <option value="Планируется">Планируется</option>
+            <option value="Черновик">Черновик</option>
+          </select>
+        </p>
+
+        <fieldset class="field checkboxes">
+          <legend>Приоритет</legend>
+          <label class="check"><input type="checkbox" name="pr" value="high"><span>Высокий</span></label>
+          <label class="check"><input type="checkbox" name="pr" value="medium"><span>Средний</span></label>
+          <label class="check"><input type="checkbox" name="pr" value="low"><span>Низкий</span></label>
+        </fieldset>
+
+        <button type="button" id="filter-reset" class="btn btn--ghost">Сбросить</button>
+      </form>
+
+      <ul class="card-list" data-list="sprints"></ul>
+    </section>
+
+    <section id="releases">
+      <h2>Релизы</h2>
+      <table class="release-table">
+        <caption>Список релизов проекта</caption>
+        <thead>
+          <tr>
+            <th scope="col" data-sort="version" tabindex="0">Версия</th>
+            <th scope="col" data-sort="name" tabindex="0">Название</th>
+            <th scope="col" data-sort="status" tabindex="0">Статус</th>
+            <th scope="col" data-sort="releaseDate" tabindex="0">Дата</th>
+            <th scope="col" data-sort="environment" tabindex="0">Окружение</th>
+          </tr>
+        </thead>
+        <tbody data-table="releases"></tbody>
+      </table>
+    </section>
+
+    <section id="team">
+      <h2>Нагрузка команды</h2>
+      <ul class="card-list" data-list="team"></ul>
+    </section>
+  </main>
+
+  <aside class="app-aside">
+    <h2>Итого</h2>
+    <p data-summary="total"></p>
+  </aside>
+
+  <footer class="app-footer">
+    <address>Связь: <a href="mailto:team@devboard.io">team@devboard.io</a></address>
+    <p>&copy; 2024 DevBoard</p>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal__box">
+      <button class="modal__close" id="modal-close" type="button" aria-label="Закрыть">×</button>
+      <div class="modal__body" id="modal-body"></div>
+      <footer class="modal__footer">
+        <button type="button" class="btn" id="modal-ok">Понятно</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="render.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
